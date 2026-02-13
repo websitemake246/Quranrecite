@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - Quran Reader Pro</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="auth-page">
+    <div class="auth-container">
+        <div class="auth-card animate__animated animate__fadeIn">
+            <div class="auth-header">
+                <div class="auth-logo">
+                    <i class="fas fa-mosque"></i>
+                    <span>Quran Reader<span class="pro-badge">PRO</span></span>
+                </div>
+                <h2>Create Account</h2>
+                <p>Start your personalized Quran journey</p>
+            </div>
+
+            <div class="auth-body">
+                <form id="signupForm" onsubmit="handleSignup(event)">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="firstName">
+                                <i class="fas fa-user"></i>
+                                First Name
+                            </label>
+                            <input type="text" id="firstName" name="firstName" placeholder="Enter first name" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="lastName">
+                                <i class="fas fa-user"></i>
+                                Last Name
+                            </label>
+                            <input type="text" id="lastName" name="lastName" placeholder="Enter last name" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">
+                            <i class="fas fa-envelope"></i>
+                            Email Address
+                        </label>
+                        <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">
+                            <i class="fas fa-lock"></i>
+                            Password
+                        </label>
+                        <div class="password-input">
+                            <input type="password" id="password" name="password" placeholder="Create a password" required>
+                            <button type="button" class="password-toggle" onclick="togglePassword('password')">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                        <div class="password-strength" id="passwordStrength">
+                            <div class="strength-bar"></div>
+                            <div class="strength-bar"></div>
+                            <div class="strength-bar"></div>
+                            <span>Too weak</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="confirmPassword">
+                            <i class="fas fa-lock"></i>
+                            Confirm Password
+                        </label>
+                        <div class="password-input">
+                            <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm your password" required>
+                            <button type="button" class="password-toggle" onclick="togglePassword('confirmPassword')">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>
+                            <i class="fas fa-microphone"></i>
+                            Default Reciter (Optional)
+                        </label>
+                        <select id="defaultReciter">
+                            <option value="">Select your favorite reciter</option>
+                            <option value="1">Mishary Rashid Al Afasy</option>
+                            <option value="2">Abu Bakr Al Shatri</option>
+                            <option value="3">Nasser Al Qatami</option>
+                            <option value="4">Yasser Al Dosari</option>
+                            <option value="5">Hani Ar Rifai</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group terms-group">
+                        <label class="checkbox-container">
+                            <input type="checkbox" name="terms" required>
+                            <span class="checkmark"></span>
+                            I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>
+                        </label>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-block" id="signupBtn">
+                        <i class="fas fa-user-plus"></i>
+                        Create Account
+                    </button>
+
+                    <div class="social-login">
+                        <p>Or sign up with</p>
+                        <div class="social-buttons">
+                            <button type="button" class="social-btn google" onclick="socialSignup('google')">
+                                <i class="fab fa-google"></i>
+                                Google
+                            </button>
+                            <button type="button" class="social-btn facebook" onclick="socialSignup('facebook')">
+                                <i class="fab fa-facebook-f"></i>
+                                Facebook
+                            </button>
+                            <button type="button" class="social-btn apple" onclick="socialSignup('apple')">
+                                <i class="fab fa-apple"></i>
+                                Apple
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="auth-footer">
+                <p>Already have an account? <a href="login.html">Sign in</a></p>
+            </div>
+        </div>
+
+        <div class="auth-quote">
+            <div class="quote-content">
+                <i class="fas fa-quote-right"></i>
+                <p class="arabic">إِنَّ هَٰذَا الْقُرْآنَ يَهْدِي لِلَّتِي هِيَ أَقْوَمُ</p>
+                <p>"Indeed, this Quran guides to that which is most suitable"</p>
+                <small>Surah Al-Isra, 17:9</small>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function togglePassword(inputId) {
+            const input = document.getElementById(inputId);
+            const icon = event.currentTarget.querySelector('i');
+            
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            } else {
+                input.type = 'password';
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            }
+        }
+
+        // Password strength checker
+        document.getElementById('password').addEventListener('input', function(e) {
+            const password = e.target.value;
+            const strengthBars = document.querySelectorAll('#passwordStrength .strength-bar');
+            const strengthText = document.querySelector('#passwordStrength span');
+            
+            let strength = 0;
+            
+            if (password.length >= 8) strength++;
+            if (password.match(/[a-z]/) && password.match(/[A-Z]/)) strength++;
+            if (password.match(/[0-9]/)) strength++;
+            if (password.match(/[^a-zA-Z0-9]/)) strength++;
+            
+            strengthBars.forEach((bar, index) => {
+                bar.style.backgroundColor = index < strength ? getStrengthColor(strength) : '#e0e0e0';
+            });
+            
+            const strengthLabels = ['Too weak', 'Weak', 'Medium', 'Strong'];
+            strengthText.textContent = strengthLabels[strength];
+            strengthText.style.color = getStrengthColor(strength);
+        });
+
+        function getStrengthColor(strength) {
+            const colors = ['#ff6b6b', '#ffa500', '#ffd700', '#4CAF50'];
+            return colors[strength] || '#ff6b6b';
+        }
+
+        async function handleSignup(event) {
+            event.preventDefault();
+            
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            
+            if (password !== confirmPassword) {
+                alert('Passwords do not match!');
+                return;
+            }
+            
+            const btn = document.getElementById('signupBtn');
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Creating account...';
+            btn.disabled = true;
+
+            try {
+                // Here you would integrate with your auth backend
+                await new Promise(resolve => setTimeout(resolve, 2000));
+                
+                // Store user preferences
+                const defaultReciter = document.getElementById('defaultReciter').value;
+                if (defaultReciter) {
+                    localStorage.setItem('defaultReciter', defaultReciter);
+                }
+                
+                // Redirect to dashboard
+                window.location.href = 'dashboard.html?welcome=true';
+            } catch (error) {
+                alert('Signup failed. Please try again.');
+            } finally {
+                btn.innerHTML = '<i class="fas fa-user-plus"></i> Create Account';
+                btn.disabled = false;
+            }
+        }
+
+        function socialSignup(provider) {
+            alert(`${provider} signup will be integrated with Firebase/Auth0`);
+        }
+    </script>
+</body>
+</html>
