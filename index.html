@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quran Reader - Read & Listen to the Holy Quran</title>
+    <meta name="description" content="Read, listen, and reflect on the Holy Quran with translations, tafsir, and audio recitations from multiple reciters.">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header & Navigation -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-logo">
+                    <i class="fas fa-mosque"></i>
+                    <span>Quran Reader</span>
+                </div>
+                <div class="nav-menu">
+                    <a href="index.html" class="active">Home</a>
+                    <a href="#surahs">Surahs</a>
+                    <a href="#reciters">Reciters</a>
+                    <a href="#tafsir">Tafsir</a>
+                    <a href="#about">About</a>
+                </div>
+                <div class="nav-actions">
+                    <button class="theme-toggle" id="themeToggle">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                    <button class="menu-toggle" id="menuToggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1 class="arabic">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</h1>
+                <h2>The Holy Quran</h2>
+                <p>Read, listen, and reflect on the words of Allah (SWT). Access the complete Quran with translations, tafsir, and beautiful recitations from world-renowned reciters.</p>
+                <div class="hero-buttons">
+                    <a href="#surahs" class="btn btn-primary">
+                        <i class="fas fa-book-open"></i>
+                        Start Reading
+                    </a>
+                    <a href="#reciters" class="btn btn-secondary">
+                        <i class="fas fa-headphones"></i>
+                        Listen to Quran
+                    </a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="quran-ornament">
+                    <i class="fas fa-mosque"></i>
+                    <div class="ornament-text">ٱلۡقُرۡءَانُ</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats">
+        <div class="stats-container">
+            <div class="stat-item">
+                <div class="stat-number" id="totalSurahs">114</div>
+                <div class="stat-label">Surahs</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number" id="totalVerses">6,236</div>
+                <div class="stat-label">Verses</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number" id="totalReciters">5</div>
+                <div class="stat-label">Reciters</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number" id="totalTranslations">3</div>
+                <div class="stat-label">Languages</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Search Section -->
+    <section class="search-section">
+        <div class="container">
+            <div class="search-header">
+                <h2>Search the Quran</h2>
+                <p>Find any verse by Surah and Ayah number</p>
+            </div>
+            <div class="search-box">
+                <div class="search-input-wrapper">
+                    <input type="number" id="surahInput" placeholder="Surah Number (1-114)" min="1" max="114">
+                    <span class="separator">:</span>
+                    <input type="number" id="ayahInput" placeholder="Ayah Number" min="1">
+                    <button class="btn btn-search" onclick="searchVerse()">
+                        <i class="fas fa-search"></i>
+                        Search
+                    </button>
+                </div>
+                <div class="quick-search">
+                    <button onclick="quickVerse(1,1)">1:1</button>
+                    <button onclick="quickVerse(2,255)">2:255</button>
+                    <button onclick="quickVerse(36,1)">36:1</button>
+                    <button onclick="quickVerse(55,1)">55:1</button>
+                    <button onclick="quickVerse(67,1)">67:1</button>
+                    <button onclick="quickVerse(112,1)">112:1</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Surahs -->
+    <section id="surahs" class="featured-surahs">
+        <div class="container">
+            <div class="section-header">
+                <h2>Browse Surahs</h2>
+                <p>Select a Surah to begin reading</p>
+            </div>
+            <div class="surah-grid" id="surahGrid">
+                <!-- Surahs will be loaded here via JavaScript -->
+                <div class="loading-spinner">
+                    <i class="fas fa-spinner fa-spin"></i>
+                    <span>Loading Surahs...</span>
+                </div>
+            </div>
+            <div class="load-more">
+                <button id="loadMoreBtn" class="btn btn-outline">
+                    <i class="fas fa-chevron-down"></i>
+                    Load More
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reciters Section -->
+    <section id="reciters" class="reciters-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>World Renowned Reciters</h2>
+                <p>Listen to beautiful Quran recitations</p>
+            </div>
+            <div class="reciters-grid" id="recitersGrid">
+                <!-- Reciters will be loaded here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Daily Verse Section -->
+    <section class="daily-verse">
+        <div class="container">
+            <div class="verse-card">
+                <div class="verse-icon">
+                    <i class="fas fa-star"></i>
+                </div>
+                <h3>Verse of the Day</h3>
+                <div class="arabic-verse" id="dailyArabic">قُلْ هُوَ ٱللَّهُ أَحَدٌ</div>
+                <div class="translation-verse" id="dailyTranslation">Say, "He is Allah, [who is] One"</div>
+                <div class="verse-reference" id="dailyReference">Surah Al-Ikhlas, 112:1</div>
+                <div class="verse-actions">
+                    <button class="btn-verse" onclick="playDailyVerse()">
+                        <i class="fas fa-play"></i> Listen
+                    </button>
+                    <button class="btn-verse" onclick="showTafsir(112,1)">
+                        <i class="fas fa-book"></i> Tafsir
+                    </button>
+                    <button class="btn-verse" onclick="newDailyVerse()">
+                        <i class="fas fa-random"></i> New Verse
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tafsir Section -->
+    <section id="tafsir" class="tafsir-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Understanding the Quran</h2>
+                <p>Tafsir from renowned scholars</p>
+            </div>
+            <div class="tafsir-showcase">
+                <div class="scholar-card">
+                    <i class="fas fa-user-graduate"></i>
+                    <h4>Ibn Kathir</h4>
+                    <p>One of the most respected Tafsir works, known for its authentic chain of narration.</p>
+                </div>
+                <div class="scholar-card">
+                    <i class="fas fa-user-graduate"></i>
+                    <h4>Maarif ul Quran</h4>
+                    <p>Comprehensive Tafsir by Mufti Muhammad Shafi, covering spiritual and legal aspects.</p>
+                </div>
+                <div class="scholar-card">
+                    <i class="fas fa-user-graduate"></i>
+                    <h4>Tazkirul Quran</h4>
+                    <p>Contemporary Tafsir focusing on guidance for modern life.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Verse Display Modal -->
+    <div id="verseModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalSurahName"></h3>
+                <button class="close-modal" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="verse-arabic" id="modalArabic"></div>
+                <div class="verse-translation" id="modalTranslation"></div>
+                <div class="verse-audio">
+                    <h4>Listen to Recitation</h4>
+                    <div class="audio-controls" id="audioControls"></div>
+                </div>
+                <div class="verse-tafsir" id="modalTafsir"></div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" onclick="playAudio()">
+                    <i class="fas fa-play"></i> Play
+                </button>
+                <button class="btn btn-secondary" onclick="shareVerse()">
+                    <i class="fas fa-share"></i> Share
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <i class="fas fa-mosque"></i>
+                        <span>Quran Reader</span>
+                    </div>
+                    <p>Read, listen, and reflect on the Holy Quran. Your digital companion for Quranic study.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <a href="#surahs">Surahs</a>
+                    <a href="#reciters">Reciters</a>
+                    <a href="#tafsir">Tafsir</a>
+                    <a href="#about">About</a>
+                </div>
+                <div class="footer-section">
+                    <h4>Resources</h4>
+                    <a href="#">API</a>
+                    <a href="#">Documentation</a>
+                    <a href="#">Contact</a>
+                    <a href="#">Privacy Policy</a>
+                </div>
+                <div class="footer-section">
+                    <h4>Follow Us</h4>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-telegram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Quran Reader. All rights reserved. | Made with <i class="fas fa-heart" style="color: #ff6b6b;"></i> for the Ummah</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
