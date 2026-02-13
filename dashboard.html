@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Quran Reader Pro</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="dashboard-page">
+    <!-- Sidebar -->
+    <div class="dashboard-container">
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-logo">
+                    <i class="fas fa-mosque"></i>
+                    <span>Quran<span class="pro-badge">PRO</span></span>
+                </div>
+                <button class="sidebar-toggle" onclick="toggleSidebar()">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+            </div>
+
+            <div class="user-profile">
+                <div class="user-avatar">
+                    <i class="fas fa-user-circle"></i>
+                </div>
+                <div class="user-info">
+                    <h4>Ahmed Hassan</h4>
+                    <p>Free Plan</p>
+                </div>
+                <button class="user-menu-btn">
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+            </div>
+
+            <div class="quick-stats">
+                <div class="stat-item">
+                    <i class="fas fa-fire" style="color: #FF6B6B;"></i>
+                    <div>
+                        <span class="stat-value">7</span>
+                        <span class="stat-label">Day Streak</span>
+                    </div>
+                </div>
+                <div class="stat-item">
+                    <i class="fas fa-clock" style="color: #4CAF50;"></i>
+                    <div>
+                        <span class="stat-value">23</span>
+                        <span class="stat-label">Hours Read</span>
+                    </div>
+                </div>
+            </div>
+
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="nav-item active">
+                    <i class="fas fa-home"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="quran.html" class="nav-item">
+                    <i class="fas fa-quran"></i>
+                    <span>Quran</span>
+                </a>
+                <a href="bookmarks.html" class="nav-item">
+                    <i class="fas fa-bookmark"></i>
+                    <span>Bookmarks</span>
+                    <span class="badge">12</span>
+                </a>
+                <a href="history.html" class="nav-item">
+                    <i class="fas fa-history"></i>
+                    <span>History</span>
+                </a>
+                <a href="reciters.html" class="nav-item">
+                    <i class="fas fa-microphone"></i>
+                    <span>Reciters</span>
+                </a>
+                <a href="progress.html" class="nav-item">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Progress</span>
+                </a>
+                <a href="settings.html" class="nav-item">
+                    <i class="fas fa-cog"></i>
+                    <span>Settings</span>
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <div class="current-reciter">
+                    <i class="fas fa-headphones"></i>
+                    <div>
+                        <span class="label">Current Reciter</span>
+                        <span class="value" id="currentReciter">Mishary Al Afasy</span>
+                    </div>
+                </div>
+                <button class="btn btn-outline btn-sm btn-block" onclick="changeReciter()">
+                    Change
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="dashboard-header">
+                <div class="header-search">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search surah or verse...">
+                </div>
+                <div class="header-actions">
+                    <button class="header-btn">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-badge">3</span>
+                    </button>
+                    <button class="header-btn" onclick="toggleTheme()">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                    <button class="header-btn" onclick="logout()">
+                        <i class="fas fa-sign-out-alt"></i>
+                    </button>
+                </div>
+            </header>
+
+            <div class="dashboard-content">
+                <!-- Welcome Banner -->
+                <div class="welcome-banner">
+                    <div>
+                        <h1>Welcome back, Ahmed! 🌙</h1>
+                        <p>Continue your Quran journey. Your current reciter is <strong>Mishary Al Afasy</strong></p>
+                    </div>
+                    <a href="quran.html" class="btn btn-primary">
+                        <i class="fas fa-play"></i>
+                        Continue Reading
+                    </a>
+                </div>
+
+                <!-- Last Read Section -->
+                <div class="last-read">
+                    <h2>Last Read</h2>
+                    <div class="last-read-card">
+                        <div class="surah-info">
+                            <span class="surah-number">18</span>
+                            <div>
+                                <h3>Al-Kahf <span class="arabic-small">الكهف</span></h3>
+                                <p>Verse 45 · 3 hours ago</p>
+                            </div>
+                        </div>
+                        <div class="last-read-actions">
+                            <button class="btn-icon" onclick="playVerse(18,45)">
+                                <i class="fas fa-play"></i>
+                            </button>
+                            <button class="btn-icon" onclick="continueReading(18,45)">
+                                <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Actions -->
+                <div class="quick-actions">
+                    <h2>Quick Actions</h2>
+                    <div class="action-grid">
+                        <a href="surah.html?id=1" class="action-card">
+                            <i class="fas fa-play-circle"></i>
+                            <span>Play with Mishary</span>
+                        </a>
+                        <a href="random.html" class="action-card">
+                            <i class="fas fa-random"></i>
+                            <span>Random Verse</span>
+                        </a>
+                        <a href="tafsir.html" class="action-card">
+                            <i class="fas fa-book"></i>
+                            <span>Today's Tafsir</span>
+                        </a>
+                        <a href="bookmarks.html" class="action-card">
+                            <i class="fas fa-bookmark"></i>
+                            <span>View Bookmarks</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Recently Read Surahs -->
+                <div class="recent-surahs">
+                    <div class="section-header">
+                        <h2>Recently Read</h2>
+                        <a href="history.html" class="view-all">View All →</a>
+                    </div>
+                    <div class="surah-list">
+                        <div class="surah-item">
+                            <span class="surah-num">18</span>
+                            <div class="surah-details">
+                                <span class="surah-name">Al-Kahf <span class="arabic">الكهف</span></span>
+                                <span class="read-date">Today, 10:30 AM</span>
+                            </div>
+                            <button class="btn-icon" onclick="playSurah(18)">
+                                <i class="fas fa-play"></i>
+                            </button>
+                        </div>
+                        <div class="surah-item">
+                            <span class="surah-num">36</span>
+                            <div class="surah-details">
+                                <span class="surah-name">Ya-Sin <span class="arabic">يس</span></span>
+                                <span class="read-date">Yesterday</span>
+                            </div>
+                            <button class="btn-icon" onclick="playSurah(36)">
+                                <i class="fas fa-play"></i>
+                            </button>
+                        </div>
+                        <div class="surah-item">
+                            <span class="surah-num">67</span>
+                            <div class="surah-details">
+                                <span class="surah-name">Al-Mulk <span class="arabic">الملك</span></span>
+                                <span class="read-date">2 days ago</span>
+                            </div>
+                            <button class="btn-icon" onclick="playSurah(67)">
+                                <i class="fas fa-play"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recommended -->
+                <div class="recommended">
+                    <h2>Recommended for You</h2>
+                    <div class="recommended-grid">
+                        <div class="recommend-card">
+                            <i class="fas fa-star"></i>
+                            <h4>Surah Al-Mulk</h4>
+                            <p>Protection from grave punishment</p>
+                            <button onclick="playSurah(67)">Listen →</button>
+                        </div>
+                        <div class="recommend-card">
+                            <i class="fas fa-heart"></i>
+                            <h4>Surah Ar-Rahman</h4>
+                            <p>The Most Merciful</p>
+                            <button onclick="playSurah(55)">Listen →</button>
+                        </div>
+                        <div class="recommend-card">
+                            <i class="fas fa-shield"></i>
+                            <h4>Ayatul Kursi</h4>
+                            <p>Verse of the Throne</p>
+                            <button onclick="playVerse(2,255)">Listen →</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Now Playing Bar -->
+    <div class="now-playing" id="nowPlaying">
+        <div class="now-playing-info">
+            <i class="fas fa-music"></i>
+            <div>
+                <span class="surah-name">Al-Fatihah</span>
+                <span class="verse-num">Verse 1</span>
+            </div>
+        </div>
+        <div class="now-playing-controls">
+            <button onclick="previousVerse()"><i class="fas fa-backward"></i></button>
+            <button onclick="togglePlay()" class="play-btn"><i class="fas fa-play"></i></button>
+            <button onclick="nextVerse()"><i class="fas fa-forward"></i></button>
+        </div>
+        <div class="now-playing-reciter">
+            <i class="fas fa-user"></i>
+            <span>Mishary Al Afasy</span>
+        </div>
+        <button class="close-now-playing" onclick="closeNowPlaying()">
+            <i class="fas fa-times"></i>
+        </button>
+    </div>
+
+    <script>
+        let isPlaying = false;
+        let audio = null;
+
+        function toggleSidebar() {
+            document.getElementById('sidebar').classList.toggle('collapsed');
+        }
+
+        function changeReciter() {
+            window.location.href = 'reciters.html';
+        }
+
+        function playSurah(surahNo) {
+            // Play surah with user's default reciter
+            const reciter = localStorage.getItem('defaultReciter') || '1';
+            alert(`Playing Surah ${surahNo} with your default reciter`);
+            showNowPlaying();
+        }
+
+        function playVerse(surahNo, verseNo) {
+            const reciter = localStorage.getItem('defaultReciter') || '1';
+            alert(`Playing ${surahNo}:${verseNo} with your default reciter`);
+            showNowPlaying();
+        }
+
+        function continueReading(surahNo, verseNo) {
+            window.location.href = `surah.html?id=${surahNo}#verse-${verseNo}`;
+        }
+
+        function showNowPlaying() {
+            document.getElementById('nowPlaying').classList.add('show');
+        }
+
+        function closeNowPlaying() {
+            document.getElementById('nowPlaying').classList.remove('show');
+            if (audio) {
+                audio.pause();
+                audio = null;
+            }
+        }
+
+        function togglePlay() {
+            const playBtn = document.querySelector('.now-playing-controls .play-btn i');
+            if (isPlaying) {
+                playBtn.classList.remove('fa-pause');
+                playBtn.classList.add('fa-play');
+                if (audio) audio.pause();
+            } else {
+                playBtn.classList.remove('fa-play');
+                playBtn.classList.add('fa-pause');
+                // Play audio logic here
+            }
+            isPlaying = !isPlaying;
+        }
+
+        function logout() {
+            if (confirm('Are you sure you want to logout?')) {
+                localStorage.removeItem('user');
+                window.location.href = 'index.html';
+            }
+        }
+
+        // Initialize user data
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check if user is logged in
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get('welcome') === 'true') {
+                alert('Welcome to Quran Reader Pro! Your account has been created successfully.');
+            }
+        });
+    </script>
+</body>
+</html>
