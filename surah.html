@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Surah - Quran Reader</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .surah-header {
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+            margin-top: 80px;
+        }
+        
+        .surah-title {
+            font-size: 2.5rem;
+            font-family: 'Amiri', serif;
+            margin-bottom: 1rem;
+        }
+        
+        .surah-meta {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .verse-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem 20px;
+        }
+        
+        .verse-item {
+            background-color: var(--bg-white);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            margin-bottom: 1rem;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+        }
+        
+        .verse-item:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateX(5px);
+        }
+        
+        .verse-number {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 30px;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+        
+        .verse-arabic {
+            font-family: 'Amiri', serif;
+            font-size: 1.8rem;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+            line-height: 1.8;
+        }
+        
+        .verse-translation {
+            color: var(--text-light);
+            font-style: italic;
+            margin-bottom: 1rem;
+        }
+        
+        .verse-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border-color);
+        }
+        
+        .verse-actions button {
+            background: none;
+            border: none;
+            color: var(--text-light);
+            cursor: pointer;
+            transition: var(--transition);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .verse-actions button:hover {
+            background-color: var(--bg-cream);
+            color: var(--primary-color);
+        }
+        
+        .surah-navigation {
+            display: flex;
+            justify-content: space-between;
+            padding: 2rem 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .nav-button {
+            padding: 0.8rem 2rem;
+            background-color: var(--bg-white);
+            border: 1px solid var(--border-color);
+            border-radius: 50px;
+            color: var(--text-dark);
+            text-decoration: none;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .nav-button:hover {
+            background-color: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-logo">
+                    <i class="fas fa-mosque"></i>
+                    <span>Quran Reader</span>
+                </div>
+                <div class="nav-menu">
+                    <a href="index.html">Home</a>
+                    <a href="index.html#surahs" class="active">Surahs</a>
+                    <a href="index.html#reciters">Reciters</a>
+                    <a href="index.html#tafsir">Tafsir</a>
+                    <a href="#about">About</a>
+                </div>
+                <div class="nav-actions">
+                    <button class="theme-toggle" id="themeToggle">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                    <button class="menu-toggle" id="menuToggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div id="surahContent"></div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <i class="fas fa-mosque"></i>
+                        <span>Quran Reader</span>
+                    </div>
+                    <p>Read, listen, and reflect on the Holy Quran. Your digital companion for Quranic study.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <a href="index.html">Home</a>
+                    <a href="index.html#surahs">Surahs</a>
+                    <a href="index.html#reciters">Reciters</a>
+                    <a href="index.html#tafsir">Tafsir</a>
+                </div>
+                <div class="footer-section">
+                    <h4>Resources</h4>
+                    <a href="#">API</a>
+                    <a href="#">Documentation</a>
+                    <a href="#">Contact</a>
+                    <a href="#">Privacy Policy</a>
+                </div>
+                <div class="footer-section">
+                    <h4>Follow Us</h4>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-telegram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Quran Reader. All rights reserved. | Made with <i class="fas fa-heart" style="color: #ff6b6b;"></i> for the Ummah</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Load surah on page load
+        document.addEventListener('DOMContentLoaded', async () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const surahNo = parseInt(urlParams.get('id')) || 1;
+            
+            const surahData = await fetchSurah(surahNo);
+            if (surahData) {
+                displaySurah(surahData);
+            }
+        });
+        
+        function displaySurah(surahData) {
+            const container = document.getElementById('surahContent');
+            const surahNo = surahData.surahNo;
+            const prevSurah = surahNo > 1 ? surahNo - 1 : null;
+            const nextSurah = surahNo < 114 ? surahNo + 1 : null;
+            
+            const emoji = getEmojiForSurah(surahNo);
+            const revelationEmoji = surahData.revelationPlace?.toLowerCase() === 'mecca' ? '🕋' : '🕌';
+            
+            let versesHTML = '';
+            
+            // Generate verses
+            for (let i = 0; i < surahData.english.length; i++) {
+                versesHTML += `
+                    <div class="verse-item" id="verse-${i+1}">
+                        <div class="verse-number">${i+1}</div>
+                        <div class="verse-arabic">${surahData.arabic1[i] || ''}</div>
+                        <div class="verse-translation">${surahData.english[i] || ''}</div>
+                        <div class="verse-actions">
+                            <button onclick="playVerseAudio(${surahNo}, ${i+1})">
+                                <i class="fas fa-play"></i> Listen
+                            </button>
+                            <button onclick="showVerse(${surahNo}, ${i+1})">
+                                <i class="fas fa-info-circle"></i> Details
+                            </button>
+                            <button onclick="copyVerse('${surahData.arabic1[i] || ''}', '${surahData.english[i] || ''}')">
+                                <i class="fas fa-copy"></i> Copy
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            container.innerHTML = `
+                <div class="surah-header">
+                    <h1 class="surah-title">${emoji} ${surahData.surahNameArabicLong || surahData.surahNameArabic}</h1>
+                    <div class="surah-meta">
+                        <span><i class="fas fa-book-open"></i> ${surahData.surahName}</span>
+                        <span>${revelationEmoji} ${surahData.revelationPlace}</span>
+                        <span><i class="fas fa-list"></i> ${surahData.totalAyah} Verses</span>
+                    </div>
+                    <p style="font-size: 1.2rem; opacity: 0.9;">${surahData.surahNameTranslation}</p>
+                </div>
+                
+                <div class="verse-container">
+                    ${versesHTML}
+                </div>
+                
+                <div class="surah-navigation">
+                    ${prevSurah ? `<a href="surah.html?id=${prevSurah}" class="nav-button">
+                        <i class="fas fa-arrow-left"></i> Previous Surah
+                    </a>` : '<div></div>'}
+                    
+                    <a href="index.html#surahs" class="nav-button">
+                        <i class="fas fa-grid"></i> All Surahs
+                    </a>
+                    
+                    ${nextSurah ? `<a href="surah.html?id=${nextSurah}" class="nav-button">
+                        Next Surah <i class="fas fa-arrow-right"></i>
+                    </a>` : '<div></div>'}
+                </div>
+            `;
+        }
+        
+        async function playVerseAudio(surahNo, ayahNo) {
+            const audioData = await fetchAudio(surahNo, ayahNo);
+            if (audioData && audioData['1']) {
+                const audio = new Audio(audioData['1'].originalUrl || audioData['1'].url);
+                audio.play();
+            }
+        }
+        
+        function copyVerse(arabic, translation) {
+            const text = `${arabic}\n\n${translation}`;
+            navigator.clipboard.writeText(text);
+            alert('Verse copied to clipboard!');
+        }
+    </script>
+</body>
+</html>
