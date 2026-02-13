@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tafsir - Quran Reader</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .tafsir-header {
+            background: linear-gradient(135deg, var(--secondary-color), #b88d4b);
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+            margin-top: 80px;
+        }
+        
+        .tafsir-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 3rem 20px;
+        }
+        
+        .verse-preview {
+            background-color: var(--bg-cream);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        
+        .verse-preview .arabic {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .scholar-tabs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .scholar-tab {
+            padding: 0.8rem 2rem;
+            background-color: var(--bg-white);
+            border: 1px solid var(--border-color);
+            border-radius: 50px;
+            color: var(--text-dark);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .scholar-tab.active {
+            background-color: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+        
+        .tafsir-content {
+            background-color: var(--bg-white);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            box-shadow: var(--shadow-md);
+            line-height: 1.8;
+            font-size: 1.1rem;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-logo">
+                    <i class="fas fa-mosque"></i>
+                    <span>Quran Reader</span>
+                </div>
+                <div class="nav-menu">
+                    <a href="index.html">Home</a>
+                    <a href="index.html#surahs">Surahs</a>
+                    <a href="index.html#reciters">Reciters</a>
+                    <a href="index.html#tafsir" class="active">Tafsir</a>
+                </div>
+                <div class="nav-actions">
+                    <button class="theme-toggle" id="themeToggle">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                    <button class="menu-toggle" id="menuToggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div id="tafsirContent">
+        <div class="tafsir-header">
+            <h1 style="font-size: 2.5rem; font-family: 'Amiri', serif;">تفسير القرآن</h1>
+            <p style="font-size: 1.2rem; margin-top: 1rem;">Tafsir - Quranic Exegesis</p>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <i class="fas fa-mosque"></i>
+                        <span>Quran Reader</span>
+                    </div>
+                    <p>Read, listen, and reflect on the Holy Quran. Your digital companion for Quranic study.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <a href="index.html">Home</a>
+                    <a href="index.html#surahs">Surahs</a>
+                    <a href="index.html#reciters">Reciters</a>
+                    <a href="index.html#tafsir">Tafsir</a>
+                </div>
+                <div class="footer-section">
+                    <h4>Resources</h4>
+                    <a href="#">API</a>
+                    <a href="#">Documentation</a>
+                    <a href="#">Contact</a>
+                    <a href="#">Privacy Policy</a>
+                </div>
+                <div class="footer-section">
+                    <h4>Follow Us</h4>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-telegram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Quran Reader. All rights reserved. | Made with <i class="fas fa-heart" style="color: #ff6b6b;"></i> for the Ummah</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const surahNo = parseInt(urlParams.get('surah'));
+            const ayahNo = parseInt(urlParams.get('ayah'));
+            
+            if (surahNo && ayahNo) {
+                await loadTafsir(surahNo, ayahNo);
+            }
+        });
+        
+        async function loadTafsir(surahNo, ayahNo) {
+            const tafsirData = await fetchTafsir(surahNo, ayahNo);
+            const verseData = await fetchVerse(surahNo, ayahNo);
+            
+            if (!tafsirData) {
+                document.getElementById('tafsirContent').innerHTML += `
+                    <div style="text-align: center; padding: 3rem;">
+                        <p style="color: var(--text-light);">Tafsir not available for this verse.</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            let activeTab = 0;
+            
+            function renderTafsir(index) {
+                const tafsir = tafsirData.tafsirs[index];
+                const container = document.getElementById('tafsirContent');
+                
+                container.innerHTML = `
+                    <div class="tafsir-header">
+                        <h1 style="font-size: 2.5rem; font-family: 'Amiri', serif;">تفسير القرآن</h1>
+                        <p style="font-size: 1.2rem; margin-top: 1rem;">Tafsir - Quranic Exegesis</p>
+                    </div>
+                    
+                    <div class="tafsir-container">
+                        <div class="verse-preview">
+                            <div class="arabic">${verseData?.arabic1 || ''}</div>
+                            <div style="color: var(--text-light); margin-top: 1rem;">
+                                Surah ${verseData?.surahName || ''} (${surahNo}:${ayahNo})
+                            </div>
+                            <div style="margin-top: 0.5rem; color: var(--primary-color);">
+                                ${verseData?.english || ''}
+                            </div>
+                        </div>
+                        
+                        <div class="scholar-tabs">
+                            ${tafsirData.tafsirs.map((t, i) => `
+                                <button class="scholar-tab ${i === index ? 'active' : ''}" 
+                                        onclick="loadTafsir(${surahNo}, ${ayahNo}, ${i})">
+                                    ${t.author}
+                                </button>
+                            `).join('')}
+                        </div>
+                        
+                        <div class="tafsir-content">
+                            ${tafsir.content.replace(/\n/g, '<br>')}
+                        </div>
+                        
+                        <div style="display: flex; justify-content: center; gap: 1rem; margin-top: 2rem;">
+                            <a href="surah.html?id=${surahNo}#verse-${ayahNo}" class="btn btn-primary">
+                                <i class="fas fa-book-open"></i> Read Verse
+                            </a>
+                            <a href="index.html#surahs" class="btn btn-secondary">
+                                <i class="fas fa-grid"></i> All Surahs
+                            </a>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            renderTafsir(activeTab);
+        }
+    </script>
+</body>
+</html>
