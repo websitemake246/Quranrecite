@@ -3,43 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quran Reader Pro - Read & Listen with Your Preferred Reciter</title>
-    <meta name="description" content="Personalized Quran reading experience. Create account, save your favorite reciter, and enjoy seamless Quran study.">
+    <title>Quran Reader - Read & Listen to the Holy Quran</title>
+    <meta name="description" content="Read, listen, and reflect on the Holy Quran with translations, tafsir, and audio recitations from multiple reciters.">
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
 </head>
 <body>
-    <!-- Preloader -->
-    <div class="preloader" id="preloader">
-        <div class="loader"></div>
-    </div>
-
     <!-- Header & Navigation -->
-    <header class="header glass-effect" id="header">
+    <header class="header">
         <nav class="navbar">
             <div class="nav-container">
                 <div class="nav-logo">
                     <i class="fas fa-mosque"></i>
-                    <span>Quran Reader<span class="pro-badge">PRO</span></span>
+                    <span>Quran Reader (Khalid's Project)</span>
                 </div>
-                <div class="nav-menu" id="navMenu">
-                    <a href="#home" class="active">Home</a>
-                    <a href="#features">Features</a>
+                <div class="nav-menu">
+                    <a href="index.html" class="active">Home</a>
                     <a href="#surahs">Surahs</a>
                     <a href="#reciters">Reciters</a>
-                    <a href="#premium">Premium</a>
-                    <a href="#contact">Contact</a>
+                    <a href="#tafsir">Tafsir</a>
+                    <a href="#about">About</a>
                 </div>
                 <div class="nav-actions">
                     <button class="theme-toggle" id="themeToggle">
                         <i class="fas fa-moon"></i>
                     </button>
-                    <div class="auth-buttons">
-                        <a href="login.html" class="btn btn-outline">Login</a>
-                        <a href="signup.html" class="btn btn-primary">Sign Up Free</a>
-                    </div>
                     <button class="menu-toggle" id="menuToggle">
                         <i class="fas fa-bars"></i>
                     </button>
@@ -49,486 +38,198 @@
     </header>
 
     <!-- Hero Section -->
-    <section id="home" class="hero">
-        <div class="hero-content animate__animated animate__fadeIn">
+    <section class="hero">
+        <div class="hero-content">
             <div class="hero-text">
-                <span class="hero-badge">✨ Personalized Quran Experience</span>
                 <h1 class="arabic">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</h1>
-                <h2>Your Personal Quran <span class="gradient-text">Companion</span></h2>
-                <p>Create your account, choose your favorite reciter, and enjoy a personalized Quran reading experience. Your preferences follow you everywhere.</p>
-                
-                <div class="hero-stats">
-                    <div class="hero-stat">
-                        <i class="fas fa-book-open"></i>
-                        <div>
-                            <span class="stat-number">114</span>
-                            <span class="stat-label">Surahs</span>
-                        </div>
-                    </div>
-                    <div class="hero-stat">
-                        <i class="fas fa-headphones"></i>
-                        <div>
-                            <span class="stat-number">5+</span>
-                            <span class="stat-label">Reciters</span>
-                        </div>
-                    </div>
-                    <div class="hero-stat">
-                        <i class="fas fa-users"></i>
-                        <div>
-                            <span class="stat-number">10K+</span>
-                            <span class="stat-label">Users</span>
-                        </div>
-                    </div>
-                </div>
-
+                <h2>The Holy Quran</h2>
+                <p>Read, listen, and reflect on the words of Allah (SWT). Access the complete Quran with translations, tafsir, and beautiful recitations from world-renowned reciters.</p>
                 <div class="hero-buttons">
-                    <a href="signup.html" class="btn btn-primary btn-large">
-                        <i class="fas fa-user-plus"></i>
-                        Get Started Free
+                    <a href="#surahs" class="btn btn-primary">
+                        <i class="fas fa-book-open"></i>
+                        Start Reading
                     </a>
-                    <a href="#features" class="btn btn-secondary btn-large">
-                        <i class="fas fa-play"></i>
-                        See Features
+                    <a href="#reciters" class="btn btn-secondary">
+                        <i class="fas fa-headphones"></i>
+                        Listen to Quran
                     </a>
-                </div>
-
-                <div class="trust-badges">
-                    <span><i class="fas fa-check-circle"></i> No Credit Card</span>
-                    <span><i class="fas fa-check-circle"></i> Free Forever</span>
-                    <span><i class="fas fa-check-circle"></i> 100% Halal</span>
                 </div>
             </div>
             <div class="hero-image">
-                <div class="floating-card">
-                    <div class="quran-ornament">
-                        <i class="fas fa-mosque"></i>
-                        <div class="ornament-text">ٱلۡقُرۡءَانُ</div>
-                    </div>
-                    <div class="feature-preview">
-                        <div class="preview-item">
-                            <i class="fas fa-user-check" style="color: #4CAF50;"></i>
-                            <span>Your Reciter: Mishary Al Afasy</span>
-                        </div>
-                        <div class="preview-item">
-                            <i class="fas fa-bookmark" style="color: #FFC107;"></i>
-                            <span>Last Read: Surah Al-Kahf</span>
-                        </div>
-                        <div class="preview-item">
-                            <i class="fas fa-fire" style="color: #FF6B6B;"></i>
-                            <span>7-Day Streak</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="wave-divider">
-            <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
-                <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="shape-fill"></path>
-            </svg>
-        </div>
-    </section>
-
-    <!-- Features Section -->
-    <section id="features" class="features">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-badge">WHY CHOOSE US</span>
-                <h2>Everything You Need for <span class="gradient-text">Quran Study</span></h2>
-                <p>Personalized features that enhance your Quran reading experience</p>
-            </div>
-
-            <div class="features-grid">
-                <div class="feature-card" data-aos="fade-up">
-                    <div class="feature-icon">
-                        <i class="fas fa-user-circle"></i>
-                    </div>
-                    <h3>Personal Account</h3>
-                    <p>Create your free account and save all your preferences, bookmarks, and reading progress.</p>
-                    <ul class="feature-list">
-                        <li><i class="fas fa-check"></i> Save favorite reciter</li>
-                        <li><i class="fas fa-check"></i> Track reading progress</li>
-                        <li><i class="fas fa-check"></i> Bookmark verses</li>
-                    </ul>
-                </div>
-
-                <div class="feature-card featured" data-aos="fade-up" data-aos-delay="100">
-                    <div class="feature-badge">POPULAR</div>
-                    <div class="feature-icon">
-                        <i class="fas fa-microphone-alt"></i>
-                    </div>
-                    <h3>Custom Reciter</h3>
-                    <p>Choose your favorite reciter once, and every verse you play will use your preferred reciter.</p>
-                    <div class="reciter-preview">
-                        <div class="reciter-option active">
-                            <img src="https://via.placeholder.com/30" alt="Mishary">
-                            <span>Mishary Al Afasy</span>
-                        </div>
-                        <div class="reciter-option">
-                            <img src="https://via.placeholder.com/30" alt="Shatri">
-                            <span>Abu Bakr Shatri</span>
-                        </div>
-                        <div class="reciter-option">
-                            <img src="https://via.placeholder.com/30" alt="Dosari">
-                            <span>Yasser Dosari</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="feature-card" data-aos="fade-up" data-aos-delay="200">
-                    <div class="feature-icon">
-                        <i class="fas fa-cloud-upload-alt"></i>
-                    </div>
-                    <h3>Cloud Sync</h3>
-                    <p>Your preferences and bookmarks are saved in the cloud. Access them from any device.</p>
-                    <div class="sync-demo">
-                        <i class="fas fa-laptop"></i>
-                        <i class="fas fa-arrow-right"></i>
-                        <i class="fas fa-cloud"></i>
-                        <i class="fas fa-arrow-right"></i>
-                        <i class="fas fa-mobile-alt"></i>
-                    </div>
-                </div>
-
-                <div class="feature-card" data-aos="fade-up">
-                    <div class="feature-icon">
-                        <i class="fas fa-history"></i>
-                    </div>
-                    <h3>Reading History</h3>
-                    <p>Never lose your place. We automatically save your last read verse and surah.</p>
-                </div>
-
-                <div class="feature-card" data-aos="fade-up" data-aos-delay="100">
-                    <div class="feature-icon">
-                        <i class="fas fa-bookmark"></i>
-                    </div>
-                    <h3>Smart Bookmarks</h3>
-                    <p>Bookmark important verses and organize them into custom collections.</p>
-                </div>
-
-                <div class="feature-card" data-aos="fade-up" data-aos-delay="200">
-                    <div class="feature-icon">
-                        <i class="fas fa-chart-line"></i>
-                    </div>
-                    <h3>Progress Tracking</h3>
-                    <p>Track your daily reading and earn achievement badges as you read more.</p>
+                <div class="quran-ornament">
+                    <i class="fas fa-mosque"></i>
+                    <div class="ornament-text">ٱلۡقُرۡءَانُ</div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- How It Works -->
-    <section class="how-it-works">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-badge">SIMPLE 3 STEPS</span>
-                <h2>Start Your Quran Journey</h2>
+    <!-- Stats Section -->
+    <section class="stats">
+        <div class="stats-container">
+            <div class="stat-item">
+                <div class="stat-number" id="totalSurahs">114</div>
+                <div class="stat-label">Surahs</div>
             </div>
+            <div class="stat-item">
+                <div class="stat-number" id="totalVerses">6,236</div>
+                <div class="stat-label">Verses</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number" id="totalReciters">5</div>
+                <div class="stat-label">Reciters</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number" id="totalTranslations">3</div>
+                <div class="stat-label">Languages</div>
+            </div>
+        </div>
+    </section>
 
-            <div class="steps-container">
-                <div class="step">
-                    <div class="step-number">1</div>
-                    <div class="step-icon">
-                        <i class="fas fa-user-plus"></i>
-                    </div>
-                    <h3>Create Account</h3>
-                    <p>Sign up for free in less than 30 seconds</p>
-                    <div class="step-demo">
-                        <input type="email" placeholder="Email" disabled>
-                        <input type="password" placeholder="Password" disabled>
-                        <button disabled>Sign Up</button>
-                    </div>
+    <!-- Search Section -->
+    <section class="search-section">
+        <div class="container">
+            <div class="search-header">
+                <h2>Search the Quran</h2>
+                <p>Find any verse by Surah and Ayah number</p>
+            </div>
+            <div class="search-box">
+                <div class="search-input-wrapper">
+                    <input type="number" id="surahInput" placeholder="Surah Number (1-114)" min="1" max="114">
+                    <span class="separator">:</span>
+                    <input type="number" id="ayahInput" placeholder="Ayah Number" min="1">
+                    <button class="btn btn-search" onclick="searchVerse()">
+                        <i class="fas fa-search"></i>
+                        Search
+                    </button>
                 </div>
-
-                <div class="step-arrow">
-                    <i class="fas fa-arrow-right"></i>
-                </div>
-
-                <div class="step">
-                    <div class="step-number">2</div>
-                    <div class="step-icon">
-                        <i class="fas fa-microphone"></i>
-                    </div>
-                    <h3>Choose Reciter</h3>
-                    <p>Select your favorite reciter from our list</p>
-                    <div class="step-demo">
-                        <select disabled>
-                            <option>Mishary Al Afasy</option>
-                            <option>Abu Bakr Shatri</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="step-arrow">
-                    <i class="fas fa-arrow-right"></i>
-                </div>
-
-                <div class="step">
-                    <div class="step-number">3</div>
-                    <div class="step-icon">
-                        <i class="fas fa-quran"></i>
-                    </div>
-                    <h3>Start Reading</h3>
-                    <p>Every verse will play with your chosen reciter</p>
-                    <div class="step-demo audio-wave">
-                        <i class="fas fa-play"></i>
-                        <span>Playing with Mishary...</span>
-                    </div>
+                <div class="quick-search">
+                    <button onclick="quickVerse(1,1)">1:1</button>
+                    <button onclick="quickVerse(2,255)">2:255</button>
+                    <button onclick="quickVerse(36,1)">36:1</button>
+                    <button onclick="quickVerse(55,1)">55:1</button>
+                    <button onclick="quickVerse(67,1)">67:1</button>
+                    <button onclick="quickVerse(112,1)">112:1</button>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Reciters Showcase -->
-    <section id="reciters" class="reciters-showcase">
+    <!-- Featured Surahs -->
+    <section id="surahs" class="featured-surahs">
         <div class="container">
             <div class="section-header">
-                <span class="section-badge">WORLD RENOWNED</span>
-                <h2>Choose Your Favorite <span class="gradient-text">Reciter</span></h2>
-                <p>Set your preferred reciter once, and all audio will use your choice</p>
+                <h2>Browse Surahs</h2>
+                <p>Select a Surah to begin reading</p>
             </div>
-
-            <div class="reciters-grid">
-                <div class="reciter-card premium">
-                    <div class="reciter-badge">Most Popular</div>
-                    <div class="reciter-avatar">
-                        <i class="fas fa-user-tie"></i>
-                    </div>
-                    <h3>Mishary Rashid Al Afasy</h3>
-                    <p class="reciter-country"><i class="fas fa-flag"></i> Kuwait</p>
-                    <div class="reciter-stats">
-                        <span><i class="fas fa-headphones"></i> 2M+ listens</span>
-                        <span><i class="fas fa-star"></i> 4.9</span>
-                    </div>
-                    <button class="btn btn-outline btn-sm" onclick="previewReciter(1)">
-                        <i class="fas fa-play"></i> Preview
-                    </button>
+            <div class="surah-grid" id="surahGrid">
+                <!-- Surahs will be loaded here via JavaScript -->
+                <div class="loading-spinner">
+                    <i class="fas fa-spinner fa-spin"></i>
+                    <span>Loading Surahs...</span>
                 </div>
+            </div>
+            <div class="load-more">
+                <button id="loadMoreBtn" class="btn btn-outline">
+                    <i class="fas fa-chevron-down"></i>
+                    Load More
+                </button>
+            </div>
+        </div>
+    </section>
 
-                <div class="reciter-card">
-                    <div class="reciter-avatar">
-                        <i class="fas fa-user-tie"></i>
-                    </div>
-                    <h3>Abu Bakr Al Shatri</h3>
-                    <p class="reciter-country"><i class="fas fa-flag"></i> Saudi Arabia</p>
-                    <div class="reciter-stats">
-                        <span><i class="fas fa-headphones"></i> 1.5M+ listens</span>
-                        <span><i class="fas fa-star"></i> 4.8</span>
-                    </div>
-                    <button class="btn btn-outline btn-sm" onclick="previewReciter(2)">
-                        <i class="fas fa-play"></i> Preview
-                    </button>
+    <!-- Reciters Section -->
+    <section id="reciters" class="reciters-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>World Renowned Reciters</h2>
+                <p>Listen to beautiful Quran recitations</p>
+            </div>
+            <div class="reciters-grid" id="recitersGrid">
+                <!-- Reciters will be loaded here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Daily Verse Section -->
+    <section class="daily-verse">
+        <div class="container">
+            <div class="verse-card">
+                <div class="verse-icon">
+                    <i class="fas fa-star"></i>
                 </div>
-
-                <div class="reciter-card">
-                    <div class="reciter-avatar">
-                        <i class="fas fa-user-tie"></i>
-                    </div>
-                    <h3>Nasser Al Qatami</h3>
-                    <p class="reciter-country"><i class="fas fa-flag"></i> Saudi Arabia</p>
-                    <div class="reciter-stats">
-                        <span><i class="fas fa-headphones"></i> 1.2M+ listens</span>
-                        <span><i class="fas fa-star"></i> 4.7</span>
-                    </div>
-                    <button class="btn btn-outline btn-sm" onclick="previewReciter(3)">
-                        <i class="fas fa-play"></i> Preview
+                <h3>Verse of the Day</h3>
+                <div class="arabic-verse" id="dailyArabic">قُلْ هُوَ ٱللَّهُ أَحَدٌ</div>
+                <div class="translation-verse" id="dailyTranslation">Say, "He is Allah, [who is] One"</div>
+                <div class="verse-reference" id="dailyReference">Surah Al-Ikhlas, 112:1</div>
+                <div class="verse-actions">
+                    <button class="btn-verse" onclick="playDailyVerse()">
+                        <i class="fas fa-play"></i> Listen
                     </button>
-                </div>
-
-                <div class="reciter-card">
-                    <div class="reciter-avatar">
-                        <i class="fas fa-user-tie"></i>
-                    </div>
-                    <h3>Yasser Al Dosari</h3>
-                    <p class="reciter-country"><i class="fas fa-flag"></i> Saudi Arabia</p>
-                    <div class="reciter-stats">
-                        <span><i class="fas fa-headphones"></i> 1.1M+ listens</span>
-                        <span><i class="fas fa-star"></i> 4.8</span>
-                    </div>
-                    <button class="btn btn-outline btn-sm" onclick="previewReciter(4)">
-                        <i class="fas fa-play"></i> Preview
+                    <button class="btn-verse" onclick="showTafsir(112,1)">
+                        <i class="fas fa-book"></i> Tafsir
                     </button>
-                </div>
-
-                <div class="reciter-card">
-                    <div class="reciter-avatar">
-                        <i class="fas fa-user-tie"></i>
-                    </div>
-                    <h3>Hani Ar Rifai</h3>
-                    <p class="reciter-country"><i class="fas fa-flag"></i> Saudi Arabia</p>
-                    <div class="reciter-stats">
-                        <span><i class="fas fa-headphones"></i> 950K+ listens</span>
-                        <span><i class="fas fa-star"></i> 4.7</span>
-                    </div>
-                    <button class="btn btn-outline btn-sm" onclick="previewReciter(5)">
-                        <i class="fas fa-play"></i> Preview
+                    <button class="btn-verse" onclick="newDailyVerse()">
+                        <i class="fas fa-random"></i> New Verse
                     </button>
                 </div>
             </div>
-
-            <div class="reciter-cta">
-                <p>✨ Create an account to save your favorite reciter and access all features</p>
-                <a href="signup.html" class="btn btn-primary">Get Started Now</a>
-            </div>
         </div>
     </section>
 
-    <!-- Testimonials -->
-    <section class="testimonials">
+    <!-- Tafsir Section -->
+    <section id="tafsir" class="tafsir-section">
         <div class="container">
             <div class="section-header">
-                <span class="section-badge">TESTIMONIALS</span>
-                <h2>What Our Users Say</h2>
+                <h2>Understanding the Quran</h2>
+                <p>Tafsir from renowned scholars</p>
             </div>
-
-            <div class="testimonials-grid">
-                <div class="testimonial-card">
-                    <div class="testimonial-rating">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <p class="testimonial-text">"The custom reciter feature is amazing! I set Mishary as my default and every verse I click plays with his beautiful voice. No more selecting reciter every time!"</p>
-                    <div class="testimonial-author">
-                        <img src="https://via.placeholder.com/50" alt="User">
-                        <div>
-                            <h4>Ahmed Hassan</h4>
-                            <p>Student, Egypt</p>
-                        </div>
-                    </div>
+            <div class="tafsir-showcase">
+                <div class="scholar-card">
+                    <i class="fas fa-user-graduate"></i>
+                    <h4>Ibn Kathir</h4>
+                    <p>One of the most respected Tafsir works, known for its authentic chain of narration.</p>
                 </div>
-
-                <div class="testimonial-card">
-                    <div class="testimonial-rating">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <p class="testimonial-text">"I love how my progress syncs across devices. Started reading on my laptop, continued on my phone during commute. The bookmark system is perfect for memorization."</p>
-                    <div class="testimonial-author">
-                        <img src="https://via.placeholder.com/50" alt="User">
-                        <div>
-                            <h4>Fatima Rahman</h4>
-                            <p>Teacher, UK</p>
-                        </div>
-                    </div>
+                <div class="scholar-card">
+                    <i class="fas fa-user-graduate"></i>
+                    <h4>Maarif ul Quran</h4>
+                    <p>Comprehensive Tafsir by Mufti Muhammad Shafi, covering spiritual and legal aspects.</p>
                 </div>
-
-                <div class="testimonial-card">
-                    <div class="testimonial-rating">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <p class="testimonial-text">"Finally a Quran website that remembers my preferences! The streak tracking keeps me motivated to read daily. Alhamdulillah for this blessing."</p>
-                    <div class="testimonial-author">
-                        <img src="https://via.placeholder.com/50" alt="User">
-                        <div>
-                            <h4>Omar Farooq</h4>
-                            <p>Engineer, Malaysia</p>
-                        </div>
-                    </div>
+                <div class="scholar-card">
+                    <i class="fas fa-user-graduate"></i>
+                    <h4>Tazkirul Quran</h4>
+                    <p>Contemporary Tafsir focusing on guidance for modern life.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Pricing / Plans -->
-    <section id="premium" class="pricing">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-badge">PRICING</span>
-                <h2>Simple, Transparent Plans</h2>
-                <p>Start free, upgrade when you need more</p>
+    <!-- Verse Display Modal -->
+    <div id="verseModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalSurahName"></h3>
+                <button class="close-modal" onclick="closeModal()">&times;</button>
             </div>
-
-            <div class="pricing-grid">
-                <div class="pricing-card">
-                    <div class="pricing-header">
-                        <h3>Free</h3>
-                        <div class="price">$0<span>/forever</span></div>
-                        <p>Perfect for getting started</p>
-                    </div>
-                    <ul class="pricing-features">
-                        <li><i class="fas fa-check"></i> Full Quran access</li>
-                        <li><i class="fas fa-check"></i> Choose default reciter</li>
-                        <li><i class="fas fa-check"></i> Basic bookmarks (50)</li>
-                        <li><i class="fas fa-check"></i> Reading history (7 days)</li>
-                        <li><i class="fas fa-check"></i> Basic progress tracking</li>
-                        <li class="disabled"><i class="fas fa-times"></i> Advanced analytics</li>
-                        <li class="disabled"><i class="fas fa-times"></i> Custom collections</li>
-                    </ul>
-                    <a href="signup.html" class="btn btn-outline btn-block">Get Started</a>
+            <div class="modal-body">
+                <div class="verse-arabic" id="modalArabic"></div>
+                <div class="verse-translation" id="modalTranslation"></div>
+                <div class="verse-audio">
+                    <h4>Listen to Recitation</h4>
+                    <div class="audio-controls" id="audioControls"></div>
                 </div>
-
-                <div class="pricing-card popular">
-                    <div class="popular-badge">MOST POPULAR</div>
-                    <div class="pricing-header">
-                        <h3>Pro</h3>
-                        <div class="price">$4.99<span>/month</span></div>
-                        <p>For dedicated readers</p>
-                    </div>
-                    <ul class="pricing-features">
-                        <li><i class="fas fa-check"></i> Everything in Free</li>
-                        <li><i class="fas fa-check"></i> Unlimited bookmarks</li>
-                        <li><i class="fas fa-check"></i> Lifetime reading history</li>
-                        <li><i class="fas fa-check"></i> Advanced analytics</li>
-                        <li><i class="fas fa-check"></i> Custom collections</li>
-                        <li><i class="fas fa-check"></i> Download audio</li>
-                        <li><i class="fas fa-check"></i> Priority support</li>
-                    </ul>
-                    <a href="signup.html?plan=pro" class="btn btn-primary btn-block">Upgrade to Pro</a>
-                </div>
-
-                <div class="pricing-card">
-                    <div class="pricing-header">
-                        <h3>Family</h3>
-                        <div class="price">$9.99<span>/month</span></div>
-                        <p>For the whole family</p>
-                    </div>
-                    <ul class="pricing-features">
-                        <li><i class="fas fa-check"></i> Everything in Pro</li>
-                        <li><i class="fas fa-check"></i> Up to 5 family members</li>
-                        <li><i class="fas fa-check"></i> Shared collections</li>
-                        <li><i class="fas fa-check"></i> Family progress tracking</li>
-                        <li><i class="fas fa-check"></i> Parental controls</li>
-                        <li><i class="fas fa-check"></i> 24/7 priority support</li>
-                    </ul>
-                    <a href="signup.html?plan=family" class="btn btn-outline btn-block">Choose Family</a>
-                </div>
+                <div class="verse-tafsir" id="modalTafsir"></div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" onclick="playAudio()">
+                    <i class="fas fa-play"></i> Play
+                </button>
+                <button class="btn btn-secondary" onclick="shareVerse()">
+                    <i class="fas fa-share"></i> Share
+                </button>
             </div>
         </div>
-    </section>
-
-    <!-- CTA Section -->
-    <section class="cta">
-        <div class="container">
-            <div class="cta-content">
-                <h2>Start Your Quran Journey Today</h2>
-                <p>Create your free account and choose your favorite reciter. Experience Quran like never before.</p>
-                <div class="cta-buttons">
-                    <a href="signup.html" class="btn btn-primary btn-large">
-                        <i class="fas fa-user-plus"></i>
-                        Create Free Account
-                    </a>
-                    <a href="#features" class="btn btn-secondary btn-large">
-                        <i class="fas fa-info-circle"></i>
-                        Learn More
-                    </a>
-                </div>
-                <div class="cta-stats">
-                    <span><i class="fas fa-users"></i> 10,000+ Active Users</span>
-                    <span><i class="fas fa-star"></i> 4.9/5 Rating</span>
-                </div>
-            </div>
-        </div>
-    </section>
+    </div>
 
     <!-- Footer -->
     <footer class="footer">
@@ -537,99 +238,40 @@
                 <div class="footer-section">
                     <div class="footer-logo">
                         <i class="fas fa-mosque"></i>
-                        <span>Quran Reader<span class="pro-badge">PRO</span></span>
+                        <span>Quran Reader</span>
                     </div>
-                    <p>Your personal Quran companion with custom reciter preferences and cloud sync.</p>
-                    <div class="footer-social">
-                        <a href="#"><i class="fab fa-facebook"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-telegram"></i></a>
-                        <a href="#"><i class="fab fa-youtube"></i></a>
-                    </div>
+                    <p>Read, listen, and reflect on the Holy Quran. Your digital companion for Quranic study.</p>
                 </div>
-
                 <div class="footer-section">
                     <h4>Quick Links</h4>
-                    <a href="#home">Home</a>
-                    <a href="#features">Features</a>
+                    <a href="#surahs">Surahs</a>
                     <a href="#reciters">Reciters</a>
-                    <a href="#pricing">Pricing</a>
-                    <a href="#contact">Contact</a>
+                    <a href="#tafsir">Tafsir</a>
+                    <a href="#about">About</a>
                 </div>
-
                 <div class="footer-section">
                     <h4>Resources</h4>
-                    <a href="#">Blog</a>
-                    <a href="#">Help Center</a>
                     <a href="#">API</a>
                     <a href="#">Documentation</a>
-                    <a href="#">Status</a>
-                </div>
-
-                <div class="footer-section">
-                    <h4>Legal</h4>
-                    <a href="#">Terms of Service</a>
+                    <a href="#">Contact</a>
                     <a href="#">Privacy Policy</a>
-                    <a href="#">Cookie Policy</a>
-                    <a href="#">GDPR</a>
                 </div>
-
                 <div class="footer-section">
-                    <h4>Download App</h4>
-                    <a href="#" class="app-badge">
-                        <i class="fab fa-apple"></i>
-                        <span>App Store</span>
-                    </a>
-                    <a href="#" class="app-badge">
-                        <i class="fab fa-android"></i>
-                        <span>Google Play</span>
-                    </a>
+                    <h4>Follow Us</h4>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-telegram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
                 </div>
             </div>
-
             <div class="footer-bottom">
-                <p>&copy; 2026 Quran Reader Pro. All rights reserved. Made with <i class="fas fa-heart" style="color: #ff6b6b;"></i> for the Ummah</p>
-                <div class="footer-lang">
-                    <select>
-                        <option>English</option>
-                        <option>العربية</option>
-                        <option>Urdu</option>
-                        <option>Bengali</option>
-                    </select>
-                </div>
+                <p>&copy; 2026 Quran Reader. All rights reserved. | Made with <i class="fas fa-heart" style="color: #ff6b6b;"></i> for the Ummah</p>
             </div>
         </div>
     </footer>
 
-    <!-- Audio Preview Modal -->
-    <div id="previewModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3>Preview Recitation</h3>
-                <button class="close-modal" onclick="closePreviewModal()">&times;</button>
-            </div>
-            <div class="modal-body">
-                <div class="preview-info" id="previewInfo">
-                    <i class="fas fa-user-tie"></i>
-                    <h4 id="previewReciterName">Mishary Rashid Al Afasy</h4>
-                    <p>Surah Al-Fatihah, Verse 1</p>
-                </div>
-                <div class="preview-audio">
-                    <audio controls id="previewAudio">
-                        <source src="" type="audio/mpeg">
-                    </audio>
-                </div>
-                <p class="preview-note">✨ Create an account to set this as your default reciter</p>
-            </div>
-            <div class="modal-footer">
-                <a href="signup.html" class="btn btn-primary">Sign Up to Save</a>
-                <button class="btn btn-outline" onclick="closePreviewModal()">Close</button>
-            </div>
-        </div>
-    </div>
-
-    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
