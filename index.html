@@ -76,13 +76,16 @@
                 <div class="stat-label">Verses</div>
             </div>
             <div class="stat-item">
-                <div class="stat-number" id="totalReciters">5</div>
-                <div class="stat-label">Reciters</div>
+                <div class="stat-number" id="totalVisitors">0</div>
+                <div class="stat-label">Visitors</div>
             </div>
             <div class="stat-item">
-                <div class="stat-number" id="totalTranslations">3</div>
-                <div class="stat-label">Languages</div>
+                <div class="stat-number" id="totalPlays">0</div>
+                <div class="stat-label">Audio Plays</div>
             </div>
+        </div>
+        <div class="stats-highlight">
+            <span>Current reciter: <strong id="selectedReciterName">Not selected</strong></span>
         </div>
     </section>
 
@@ -123,7 +126,6 @@
                 <p>Select a Surah to begin reading</p>
             </div>
             <div class="surah-grid" id="surahGrid">
-                <!-- Surahs will be loaded here via JavaScript -->
                 <div class="loading-spinner">
                     <i class="fas fa-spinner fa-spin"></i>
                     <span>Loading Surahs...</span>
@@ -143,10 +145,9 @@
         <div class="container">
             <div class="section-header">
                 <h2>World Renowned Reciters</h2>
-                <p>Listen to beautiful Quran recitations</p>
+                <p>Select a reciter and listen to beautiful Quran recitations</p>
             </div>
             <div class="reciters-grid" id="recitersGrid">
-                <!-- Reciters will be loaded here -->
             </div>
         </div>
     </section>
@@ -251,9 +252,9 @@
                 </div>
                 <div class="footer-section">
                     <h4>Resources</h4>
-                    <a href="#">API</a>
-                    <a href="#">Documentation</a>
-                    <a href="#">Contact</a>
+                    <a href="https://quranapi.pages.dev/api" target="_blank">API</a>
+                    <a href="https://github.com/websitemake246/Quranrecite" target="_blank">Repository</a>
+                    <a href="https://github.com/websitemake246/Quranrecite#readme" target="_blank">Readme</a>
                     <a href="#">Privacy Policy</a>
                 </div>
                 <div class="footer-section">
