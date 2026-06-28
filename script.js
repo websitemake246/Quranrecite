@@ -106,16 +106,10 @@ async function loadReciters() {
     try {
         const response = await fetch(`${API_BASE}/reciters.json`);
         reciters = await response.json();
-        // reciters.json can be an object keyed by id or a list; normalize both
-        const list = Array.isArray(reciters)
-            ? reciters
-            : Object.values(reciters || {});
-
-        const mapped = list.map((r, idx) => {
-            const name = typeof r === 'string' ? r : r.name || r.reciter || `Reciter ${idx + 1}`;
-            const id = typeof r === 'object' && r.id ? r.id : idx + 1;
-            return { id, name };
-        });
+        const mapped = Object.entries(reciters || {}).map(([id, name]) => ({
+            id: Number(id),
+            name: String(name)
+        }));
 
         displayReciters(mapped);
         restoreSelectedReciter();
@@ -241,14 +235,20 @@ function setActiveReciter(id, name) {
 function restoreSelectedReciter() {
     try {
         const saved = localStorage.getItem('quran_reciter');
-        if (!saved) return;
-        const { id, name } = JSON.parse(saved);
-        if (!id || !name) return;
+        if (saved) {
+            const { id, name } = JSON.parse(saved);
+            if (id && name) {
+                const selected = document.getElementById('selectedReciterName');
+                if (selected) selected.textContent = name;
+                return;
+            }
+        }
+        const reciter = reciters ? Object.values(reciters)[0] : null;
+        const name = typeof reciter === 'string' ? reciter : reciter?.name;
+        const id = reciter ? (typeof reciter === 'object' && reciter.id ? reciter.id : 1) : 1;
+        try { localStorage.setItem('quran_reciter', JSON.stringify({ id, name })); } catch (e) {}
         const selected = document.getElementById('selectedReciterName');
-        if (selected) selected.textContent = name;
-        // Update active UI if needed
-        const cards = document.querySelectorAll('.reciter-card')
-        // simple highlight by name text not perfect but avoids indexing assumptions
+        if (selected && name) selected.textContent = name;
     } catch (e) {}
 }
 
@@ -331,17 +331,26 @@ async function showVerse(surahNo, ayahNo) {
 }
 
 async function loadAudioOptions(surahNo, ayahNo) {
+    const reciterId = getSelectedReciterId();
     const audioContainer = document.getElementById('audioControls');
     const audioData = await fetchAudio(surahNo, ayahNo);
-    
+
     if (audioData) {
-        audioContainer.innerHTML = Object.entries(audioData).map(([id, info]) => `
-            <button class="audio-button" onclick="playAudio('${info.originalUrl || info.url}')">
+        const entries = Object.entries(audioData);
+        // Prefer selected reciter; if absent, fallback to first available entry
+        const selectedEntry = entries.find(([id]) => String(id) === String(reciterId)) || entries[0];
+        if (!selectedEntry) {
+            audioContainer.innerHTML = '<p style="color: var(--text-light);">No audio available for this verse</p>';
+            return;
+        }
+        const [id, info] = selectedEntry;
+        audioContainer.innerHTML = `
+            <button class="audio-button" onclick="playAudio('${(info.originalUrl || info.url || '').replace(/'/g, "\\'")}', '${String(id).replace(/'/g, "\\'")}')">
                 <i class="fas fa-play-circle"></i>
                 <span>${escapeHtml(info.reciter || 'Audio')}</span>
                 <i class="fas fa-headphones" style="margin-left: auto;"></i>
             </button>
-        `).join('');
+        `;
     } else {
         audioContainer.innerHTML = '<p style="color: var(--text-light);">No audio available for this verse</p>';
     }
@@ -374,7 +383,7 @@ function viewFullTafsir(surahNo, ayahNo) {
     window.location.href = `tafsir.html?surah=${surahNo}&ayah=${ayahNo}`;
 }
 
-function playAudio(url) {
+function playAudio(url, reciterId) {
     const audio = new Audio(url);
     audio.play();
     incrementPlay();
@@ -510,6 +519,10 @@ function setupEventListeners() {
 }
 
 // ========== RECITER FUNCTIONS ==========
-function showReciterAudio(reciterId) {
-    alert(`🎧 Reciter selected. Click on any verse to listen to this reciter.`);
+function showReciterAudio(reciterId, name) {
+    if (!name) {
+        alert('Please select a reciter from the Reciters section.');
+        return;
+    }
+    alert(`🎧 ${name}\n\nClick on any verse to listen to this reciter.`);
 }
