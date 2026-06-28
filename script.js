@@ -1,6 +1,6 @@
 // ========== GLOBAL VARIABLES ==========
 const API_BASE = 'https://quranapi.pages.dev/api';
-const PAYSTACK_PUBLIC_KEY = 'YOUR_PAYSTACK_PUBLIC_KEY';
+const PAYSTACK_PUBLIC_KEY = 'yxhuhcfhjsbsjsvdhdhddv';
 let surahs = [];
 let reciters = {};
 let currentPage = 1;
