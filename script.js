@@ -29,9 +29,20 @@ async function loadStats() {
     }
 }
 
+function getSelectedReciterId() {
+    try {
+        const saved = localStorage.getItem('quran_reciter');
+        if (!saved) return '1';
+        const parsed = JSON.parse(saved);
+        return parsed.id ? String(parsed.id) : '1';
+    } catch (e) {
+        return '1';
+    }
+}
+
 function updateStatsUI() {
-    const visitsEl = document.getElementById('statVisits');
-    const playsEl = document.getElementById('statPlays');
+    const visitsEl = document.getElementById('totalVisitors');
+    const playsEl = document.getElementById('totalPlays');
     if (visitsEl) visitsEl.textContent = stats.visits.toLocaleString();
     if (playsEl) playsEl.textContent = stats.plays.toLocaleString();
 }
@@ -249,10 +260,14 @@ function openSurah(surahNo) {
 async function playSurahAudio(surahNo) {
     try {
         const surahData = await fetchSurah(surahNo);
-        if (surahData?.audio?.['1']?.originalUrl) {
-            const audio = new Audio(surahData.audio['1'].originalUrl);
-            audio.play();
-            incrementPlay();
+        if (surahData?.audio) {
+            const reciterId = getSelectedReciterId();
+            const entry = surahData.audio[String(reciterId)] || Object.values(surahData.audio)[0];
+            if (entry?.originalUrl || entry?.url) {
+                const audio = new Audio(entry.originalUrl || entry.url);
+                audio.play();
+                incrementPlay();
+            }
         }
     } catch (error) {
         console.error('Error playing surah audio:', error);
