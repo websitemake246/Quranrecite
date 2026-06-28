@@ -1,5 +1,6 @@
 // ========== GLOBAL VARIABLES ==========
 const API_BASE = 'https://quranapi.pages.dev/api';
+const PAYSTACK_PUBLIC_KEY = 'YOUR_PAYSTACK_PUBLIC_KEY';
 let surahs = [];
 let reciters = {};
 let currentPage = 1;
@@ -710,11 +711,10 @@ function openFavorites() {
 function initSponsorButton() {
   const btn = document.getElementById('sponsorBtn');
   if (!btn) return;
-  const publicKey = 'YOUR_PAYSTACK_PUBLIC_KEY';
   const amount = '100000';
   const email = 'donation@example.com';
-  if (!publicKey || publicKey === 'YOUR_PAYSTACK_PUBLIC_KEY') return;
-  btn.href = `https://checkout.paystack.com/${publicKey}?amount=${amount}&email=${encodeURIComponent(email)}`;
+  if (!PAYSTACK_PUBLIC_KEY || PAYSTACK_PUBLIC_KEY === 'YOUR_PAYSTACK_PUBLIC_KEY') return;
+  btn.href = `https://checkout.paystack.com/${PAYSTACK_PUBLIC_KEY}?amount=${amount}&email=${encodeURIComponent(email)}`;
   btn.addEventListener('click', (e) => {
     if (btn.href.includes('YOUR_PAYSTACK_PUBLIC_KEY')) {
       e.preventDefault();
