@@ -14,6 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
     loadStats();
     loadDailyVerse();
     setupEventListeners();
+    initQuranBackground();
 });
 
 // ========== VISITOR STATS ==========
@@ -480,6 +481,32 @@ function showError(message) {
     setTimeout(() => {
         errorDiv.remove();
     }, 5000);
+}
+
+function initQuranBackground() {
+    const container = document.getElementById('bgAnim');
+    if (!container) return;
+    const arabicWords = [
+        'الرحمن','الله','قرآن','نور','رحمة','هدى','نصر','فرج','الحمد','رب العالمين',
+        'ملك','يوم الدين','إله','رضا','توكل','إخلاص','يقين','توبة','ذکر','برکة'
+    ];
+    const latinWords = [
+        'Quran','Nur','Huda','Rahma','Salaam','Iman','Taqwa','Ayah','Surah','Rahman'
+    ];
+    const all = [...arabicWords, ...latinWords];
+    const frag = document.createDocumentFragment();
+    for (let i = 0; i < 44; i++) {
+        const span = document.createElement('span');
+        span.className = 'word';
+        span.textContent = all[Math.floor(Math.random() * all.length)];
+        span.style.left = Math.random() * 100 + '%';
+        span.style.fontSize = Math.floor(Math.random() * (28 - 14 + 1) + 14) + 'px';
+        span.style.animationDuration = Math.floor(Math.random() * (28 - 18 + 1) + 18) + 's';
+        span.style.animationDelay = Math.floor(Math.random() * 20) + 's';
+        span.style.opacity = String(0.04 + Math.random() * 0.05);
+        frag.appendChild(span);
+    }
+    container.appendChild(frag);
 }
 
 // ========== EVENT LISTENERS ==========
