@@ -637,6 +637,30 @@ body {
   .hero-text h1 { font-size: 2rem; }
 }
 
+@media (max-width: 480px) {
+  .hero-text h1 { font-size: 1.6rem; }
+  .hero-text h2 { font-size: 1.2rem; }
+  .hero-text p { font-size: 0.95rem; }
+  .stats-container { grid-template-columns: repeat(2, 1fr); }
+  .search-input-wrapper { flex-wrap: wrap; }
+  .search-input-wrapper input { min-width: 100%; }
+  .surah-actions button { width: 36px; height: 36px; }
+  .nav-fav-btn { padding: 8px 10px; font-size: 0.85rem; }
+}
+
+@media (max-width: 768px) {
+  .nav-container { padding: 14px 16px; }
+  .nav-logo span { font-size: 1.1rem; }
+  .menu-toggle { display: inline-flex; }
+}
+
+@media (max-width: 480px) {
+  .player-bar { bottom: 72px; }
+  .sponsor-bar { bottom: 14px; }
+  .sponsor-pill { padding: 10px 14px; font-size: 0.9rem; }
+  .player-inner { padding: 10px 12px; gap: 10px; }
+}
+
 /* ========== STICKY PLAYER ========== */
 .player-bar {
   position: fixed;

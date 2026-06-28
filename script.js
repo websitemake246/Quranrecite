@@ -706,15 +706,21 @@ function openFavorites() {
   openSurah(first.surahNo);
 }
 
-// ========== SPONSOR / PAYSTACK ==========
+/* ========== SPONSOR / PAYSTACK ========== */
 function initSponsorButton() {
   const btn = document.getElementById('sponsorBtn');
   if (!btn) return;
   const publicKey = 'YOUR_PAYSTACK_PUBLIC_KEY';
   const amount = '100000';
   const email = 'donation@example.com';
-  if (publicKey === 'YOUR_PAYSTACK_PUBLIC_KEY') return;
+  if (!publicKey || publicKey === 'YOUR_PAYSTACK_PUBLIC_KEY') return;
   btn.href = `https://checkout.paystack.com/${publicKey}?amount=${amount}&email=${encodeURIComponent(email)}`;
+  btn.addEventListener('click', (e) => {
+    if (btn.href.includes('YOUR_PAYSTACK_PUBLIC_KEY')) {
+      e.preventDefault();
+      alert('Payment is not configured yet.');
+    }
+  });
 }
 
 // ========== HEADER GLASS ON SCROLL ==========
