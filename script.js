@@ -209,7 +209,7 @@ function displayReciters(list) {
     if (!recitersGrid) return;
     
     recitersGrid.innerHTML = list.map(reciter => `
-        <div class="reciter-card">
+        <div class="reciter-card" data-reciter-id="${reciter.id}">
             <div class="reciter-icon">
                 <i class="fas fa-user"></i>
             </div>
@@ -222,6 +222,7 @@ function displayReciters(list) {
             </div>
         </div>
     `).join('');
+    restoreSelectedReciter();
 }
 
 function setActiveReciter(id, name) {
@@ -229,7 +230,11 @@ function setActiveReciter(id, name) {
         localStorage.setItem('quran_reciter', JSON.stringify({ id, name }));
     } catch (e) {}
     const selected = document.getElementById('selectedReciterName');
-    if (selected) selected.textContent = name;
+    if (selected) selected.textContent = `${name} ✨`;
+    document.querySelectorAll('.reciter-card').forEach(card => {
+        const isSelected = String(card.dataset.reciterId) === String(id);
+        card.classList.toggle('reciter-card--active', !!isSelected);
+    });
     alert(`Reciter updated: ${name}`);
 }
 
@@ -553,3 +558,182 @@ function showReciterAudio(reciterId, name) {
     }
     alert(`🎧 ${name}\n\nClick on any verse to listen to this reciter.`);
 }
+
+// ========== SURAH SEARCH ==========
+const surahNameSearch = document.getElementById('surahNameSearch');
+if (surahNameSearch) {
+  surahNameSearch.addEventListener('input', () => {
+    const query = surahNameSearch.value.trim().toLowerCase();
+    filterSurahs(query);
+  });
+}
+
+function filterSurahs(query) {
+  const surahGrid = document.getElementById('surahGrid');
+  if (!surahGrid || !surahs.length) return;
+  if (!query) {
+    displaySurahs();
+    return;
+  }
+  const matches = surahs.filter(s =>
+    (s.surahName || '').toLowerCase().includes(query) ||
+    (s.surahNameArabic || '').toLowerCase().includes(query) ||
+    String(s.surahNo).includes(query)
+  );
+  surahGrid.innerHTML = matches.length
+    ? matches.map(surah => {
+        const emoji = getEmojiForSurah(surah.surahNo);
+        const revelationEmoji = surah.revelationPlace?.toLowerCase() === 'mecca' ? '🕋' : '🕌';
+        return `
+          <div class="surah-card" onclick="openSurah(${surah.surahNo})">
+            <div style="display: flex; align-items: center;">
+              <div class="surah-number">${surah.surahNo}</div>
+              <div class="surah-info">
+                <div class="surah-name">${emoji} ${surah.surahName || 'Unknown'}</div>
+                <div class="surah-name-arabic">${surah.surahNameArabic || ''}</div>
+                <div class="surah-details">
+                  <span><i class="fas fa-book-open"></i> ${surah.totalAyah || 0} verses</span>
+                  <span>${revelationEmoji} ${surah.revelationPlace || 'Unknown'}</span>
+                </div>
+              </div>
+            </div>
+            <div class="surah-actions">
+              <button onclick="event.stopPropagation(); playSurahAudio(${surah.surahNo})" title="Listen">
+                <i class="fas fa-headphones"></i>
+              </button>
+              <button onclick="event.stopPropagation(); openSurah(${surah.surahNo})" title="Read">
+                <i class="fas fa-book-open"></i>
+              </button>
+            </div>
+          </div>
+        `;
+      }).join('')
+    : '<p class="empty-state">No surahs matched your search.</p>';
+}
+
+// ========== MINI PLAYER ==========
+let miniAudio = null;
+let miniPlaying = false;
+
+function stopMiniPlayer() {
+  if (miniAudio) {
+    miniAudio.pause();
+    miniAudio = null;
+  }
+  miniPlaying = false;
+  refreshMiniPlayerUI('—');
+}
+
+function toggleMiniPlayer() {
+  if (!miniAudio) return;
+  if (miniPlaying) {
+    miniAudio.pause();
+    miniPlaying = false;
+  } else {
+    miniAudio.play();
+    miniPlaying = true;
+  }
+  refreshMiniPlayerIcon();
+}
+
+function refreshMiniPlayerUI(title) {
+  const titleEl = document.getElementById('playerTitle');
+  if (titleEl) titleEl.textContent = title || '—';
+  refreshMiniPlayerIcon();
+}
+
+function refreshMiniPlayerIcon() {
+  const btn = document.getElementById('playerToggle');
+  if (!btn) return;
+  const icon = btn.querySelector('i');
+  if (!icon) return;
+  icon.classList.toggle('fa-pause', !!miniPlaying);
+  icon.classList.toggle('fa-play', !miniPlaying);
+}
+
+// ========== FAVORITES ==========
+const FAV_KEY = 'quran_favorites';
+
+function getFavorites() {
+  try {
+    const raw = localStorage.getItem(FAV_KEY);
+    return raw ? JSON.parse(raw) : [];
+  } catch (e) {
+    return [];
+  }
+}
+
+function saveFavorites(items) {
+  try { localStorage.setItem(FAV_KEY, JSON.stringify(items)); } catch (e) {}
+}
+
+function toggleFavorite(surahNo, ayahNo) {
+  const list = getFavorites();
+  const idx = list.findIndex(f => String(f.surahNo) === String(surahNo) && String(f.ayahNo) === String(ayahNo));
+  if (idx > -1) {
+    list.splice(idx, 1);
+  } else {
+    list.unshift({ surahNo, ayahNo, ts: Date.now() });
+  }
+  saveFavorites(list);
+}
+
+function isFavorite(surahNo, ayahNo) {
+  return getFavorites().some(f => String(f.surahNo) === String(surahNo) && String(f.ayahNo) === String(ayahNo));
+}
+
+function openFavorites() {
+  const list = getFavorites();
+  if (!list.length) {
+    alert('No saved favorites yet.');
+    return;
+  }
+  const [first, ...rest] = list;
+  openSurah(first.surahNo);
+}
+
+// ========== SPONSOR / PAYSTACK ==========
+function initSponsorButton() {
+  const btn = document.getElementById('sponsorBtn');
+  if (!btn) return;
+  const publicKey = 'YOUR_PAYSTACK_PUBLIC_KEY';
+  const amount = '100000';
+  const email = 'donation@example.com';
+  if (publicKey === 'YOUR_PAYSTACK_PUBLIC_KEY') return;
+  btn.href = `https://checkout.paystack.com/${publicKey}?amount=${amount}&email=${encodeURIComponent(email)}`;
+}
+
+// ========== HEADER GLASS ON SCROLL ==========
+function initHeaderScroll() {
+  const header = document.querySelector('.header');
+  if (!header) return;
+  const onScroll = () => {
+    const scrolled = window.scrollY > 20;
+    header.classList.toggle('header--glass', scrolled);
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+}
+
+// ========== SCROLL REVEAL ==========
+function initScrollReveal() {
+  if (!('IntersectionObserver' in window)) return;
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('revealed');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll(
+    '.surah-card, .reciter-card, .verse-card, .scholar-card, .stat-item, .section-header'
+  ).forEach(el => observer.observe(el));
+}
+
+// ========== INIT HOOKS ==========
+document.addEventListener('DOMContentLoaded', () => {
+  initSponsorButton();
+  initHeaderScroll();
+  initScrollReveal();
+});
