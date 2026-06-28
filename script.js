@@ -389,10 +389,24 @@ function viewFullTafsir(surahNo, ayahNo) {
     window.location.href = `tafsir.html?surah=${surahNo}&ayah=${ayahNo}`;
 }
 
-function playAudio(url, reciterId) {
+function playAudio(url, reciterId, title) {
+    if (miniAudio) {
+        miniAudio.pause();
+        miniAudio = null;
+    }
     const audio = new Audio(url);
+    miniAudio = audio;
+    miniPlaying = true;
     audio.play();
     incrementPlay();
+    refreshMiniPlayerUI((title && String(title).trim()) ? String(title).trim() : 'Now playing');
+    const bar = document.getElementById('playerBar');
+    if (bar) bar.classList.add('is-visible');
+    audio.addEventListener('ended', () => {
+        miniPlaying = false;
+        refreshMiniPlayerUI('—');
+        if (bar) bar.classList.remove('is-visible');
+    }, { once: true });
 }
 
 function playDailyVerse() {
